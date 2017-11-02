@@ -16,10 +16,6 @@ public abstract class Aspirantes implements Comparable<Aspirantes>{
 		this.notaEscalafon = notaEscalafon;
 		this.notaHistoria = notaHistoria; 
 	}
-	public void algo() {
-		
-	}
-
 	/**
 	 * @return the nombre
 	 */
@@ -93,6 +89,9 @@ public abstract class Aspirantes implements Comparable<Aspirantes>{
 		if(notaEscalafon < a.getNotaEscalafon()) {
 			return -1; 
 		} 
+		if(notaEscalafon > a.getNotaEscalafon()) {
+			return 1; 
+		}
 		return 0; 
 	}
 	
