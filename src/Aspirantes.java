@@ -93,9 +93,6 @@ public abstract class Aspirantes implements Comparable<Aspirantes>{
 		if(notaEscalafon < a.getNotaEscalafon()) {
 			return -1; 
 		} 
-		if(notaEscalafon > a.getNotaEscalafon()) {
-			return 1; 
-		}
 		return 0; 
 	}
 	
