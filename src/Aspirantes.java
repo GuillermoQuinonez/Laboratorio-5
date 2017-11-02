@@ -1,7 +1,7 @@
 /**
  * @file Aspirantes.java
  * @author José Guillermo Quiñónez Castillo <qui17775@uvg.edu.gt>
- * @author Estuardo 
+ * @author Estuardo Ureta 17010 <ure17010@uvg.edu.gt>
  * @version 2/11/2017 A
  */
 public abstract class Aspirantes implements Comparable<Aspirantes>{
@@ -16,10 +16,6 @@ public abstract class Aspirantes implements Comparable<Aspirantes>{
 		this.notaEscalafon = notaEscalafon;
 		this.notaHistoria = notaHistoria; 
 	}
-	public void algo() {
-		
-	}
-
 	/**
 	 * @return the nombre
 	 */
