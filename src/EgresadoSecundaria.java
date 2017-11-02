@@ -104,6 +104,14 @@ public class EgresadoSecundaria extends Aspirantes{
 		this.nota3 = nota3;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "EgresadoSecundaria [ notaMatematicas=" + notaMatematicas + ", notaEspaniol=" + notaEspaniol + ", nota1="
+				+ nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
+	}
 
 
 	/* (non-Javadoc)
