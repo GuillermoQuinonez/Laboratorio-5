@@ -61,7 +61,10 @@ public class EgresadoBachillerato extends Aspirantes {
 	 */
 	@Override
 	public void NotaParaEscalafon() {
-			
+		float PromedioNotasEstudio = (float) ((nota4 + nota5)/2.0); 
+		float PromedioExamenes = notaHistoria; 
+		float NotaEgresadoBachillerato = (float) ((0.6*PromedioNotasEstudio) + (0.4*PromedioExamenes)); 
+		this.notaEscalafon = NotaEgresadoBachillerato; 
 	} 
 	
 	

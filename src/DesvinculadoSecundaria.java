@@ -51,7 +51,10 @@ public class DesvinculadoSecundaria extends EgresadoSecundaria {
 	@Override
 	public void NotaParaEscalafon() {
 		// TODO Auto-generated method stub
-		
+		float PromedioNotasEstudio = (float) ((nota1 + nota2 + nota3)/3.0); 
+		float PromedioExamenes = (float) ((notaHistoria + notaMatematicas + notaEspaniol)/3.0); 
+		float NotaDesvinculadoSecundaria = (float) (((0.4*PromedioNotasEstudio) + (0.6*PromedioExamenes) + notaAptitud)/2.0);
+		this.notaEscalafon = NotaDesvinculadoSecundaria; 
 	} 
 	
 	

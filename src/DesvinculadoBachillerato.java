@@ -16,7 +16,6 @@ public class DesvinculadoBachillerato extends EgresadoBachillerato {
 	 */
 	public DesvinculadoBachillerato(String nombre, String dpi, float notaEscalafon, float notaHistoria, float nota4, float nota5) {
 		super(nombre, dpi, notaEscalafon, notaHistoria, nota4, nota5);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/* (non-Javadoc)
@@ -32,7 +31,10 @@ public class DesvinculadoBachillerato extends EgresadoBachillerato {
 	 */
 	@Override
 	public void NotaParaEscalafon() {
-			
+		float PromedioNotasEstudio = (float) ((nota4 + nota5)/2.0); 
+		float PromedioExamenes = notaHistoria; 
+		float NotaDesvinculadoBachillerato = (float) ((0.4*PromedioNotasEstudio) + (0.6*PromedioExamenes)); 
+		this.notaEscalafon = NotaDesvinculadoBachillerato; 
 	} 
 	
 	
