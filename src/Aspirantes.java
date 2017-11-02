@@ -11,5 +11,8 @@ public abstract class Aspirantes {
 		this.notaEscalafon = notaEscalafon;
 		this.notaHistoria = notaHistoria; 
 	}
+	public void algo() {
+		
+	}
 
 }
