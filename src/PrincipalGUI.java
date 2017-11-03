@@ -189,5 +189,13 @@ public class PrincipalGUI {
 		JButton btnEscalafn = new JButton("Escalaf\u00F3n");
 		btnEscalafn.setBounds(490, 212, 97, 25);
 		frame.getContentPane().add(btnEscalafn);
+		
+		JButton btnNewButton = new JButton("Nota mayor a 80%");
+		btnNewButton.setBounds(405, 280, 182, 25);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnVerificador = new JButton("Verificador");
+		btnVerificador.setBounds(405, 338, 97, 25);
+		frame.getContentPane().add(btnVerificador);
 	}
 }
