@@ -85,26 +85,29 @@ public class PrincipalGUI {
 		panel_2.setLayout(new GridLayout(3, 2, 5, 5));
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNombre);
 		
 		tfNombre = new JTextField();
-		tfNombre.setForeground(Color.BLUE);
+		tfNombre.setForeground(Color.BLACK);
 		tfNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(tfNombre);
 		tfNombre.setColumns(10);
 		
 		JLabel lblDpi = new JLabel("DPI");
+		lblDpi.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblDpi.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblDpi);
 		
 		tfDpi = new JTextField();
-		tfDpi.setForeground(Color.BLUE);
+		tfDpi.setForeground(Color.BLACK);
 		tfDpi.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(tfDpi);
 		tfDpi.setColumns(10);
 		
 		JLabel lblTipo = new JLabel("TIPO");
+		lblTipo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblTipo.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblTipo);
 		
