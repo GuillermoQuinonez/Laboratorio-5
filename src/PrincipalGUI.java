@@ -64,16 +64,19 @@ public class PrincipalGUI {
 	 */
 	private void initialize() {
 		frmEscalafnDeAspirantes = new JFrame();
+		frmEscalafnDeAspirantes.getContentPane().setBackground(Color.WHITE);
 		frmEscalafnDeAspirantes.setTitle("ESCALAF\u00D3N DE ASPIRANTES A PERITO CONTADOR");
 		frmEscalafnDeAspirantes.setBounds(100, 100, 910, 525);
 		frmEscalafnDeAspirantes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEscalafnDeAspirantes.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		frmEscalafnDeAspirantes.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
 		panel_2.setBounds(0, 0, 446, 200);
 		panel_2.setBorder(new TitledBorder(null, "INGRESO DE DATOS DEL ASPIRANTE ", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
 		panel_1.add(panel_2);
@@ -104,6 +107,7 @@ public class PrincipalGUI {
 		panel_2.add(lblTipo);
 		
 		cbTipo = new JComboBox<>();
+		cbTipo.setBackground(UIManager.getColor("EditorPane.selectionBackground"));
 		cbTipo.addItem("Egresado de Secundaria");
 		cbTipo.addItem("Desvinculado de Secundaria");
 		cbTipo.addItem("Egresado de Bachillerato");
@@ -111,6 +115,7 @@ public class PrincipalGUI {
 		panel_2.add(cbTipo);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
 		panel_3.setBounds(0, 200, 446, 277);
 		panel_3.setBorder(new TitledBorder(null, "Ingreso de Notas", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel_1.add(panel_3);
@@ -203,10 +208,12 @@ public class PrincipalGUI {
 		panel_3.add(btnActualizar);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		frmEscalafnDeAspirantes.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(2, 1, 5, 5));
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.WHITE);
 		panel_4.setBorder(new TitledBorder(null, "ESCALAF\u00D3N", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel.add(panel_4);
 		panel_4.setLayout(new GridLayout(0, 1, 0, 0));
@@ -215,6 +222,7 @@ public class PrincipalGUI {
 		panel_4.add(scrollPane);*/
 		
 		txtEscalafon = new JTextArea();
+		txtEscalafon.setEditable(false);
 		txtEscalafon.setLineWrap(true);
 		txtEscalafon.setWrapStyleWord(true);
 		JScrollPane scrollPane = new JScrollPane(txtEscalafon, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -225,6 +233,7 @@ public class PrincipalGUI {
 		panel_5.setLayout(new GridLayout(1, 2, 5, 5));
 		
 		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(Color.WHITE);
 		panel_6.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "ASPIRANTES DE SECUNDARIA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_5.add(panel_6);
 		panel_6.setLayout(null);
@@ -235,6 +244,7 @@ public class PrincipalGUI {
 		panel_6.add(lblIngresarPromedio);
 		
 		tfAspirantesSecundaria = new JTextField();
+		tfAspirantesSecundaria.setHorizontalAlignment(SwingConstants.CENTER);
 		tfAspirantesSecundaria.setBounds(12, 67, 196, 29);
 		panel_6.add(tfAspirantesSecundaria);
 		tfAspirantesSecundaria.setColumns(10);
@@ -244,10 +254,14 @@ public class PrincipalGUI {
 		panel_6.add(btnValidar);
 		
 		txtAspirantesSecundaria = new JTextArea();
+		txtAspirantesSecundaria.setEditable(false);
+		txtAspirantesSecundaria.setWrapStyleWord(true);
+		txtAspirantesSecundaria.setLineWrap(true);
 		txtAspirantesSecundaria.setBounds(12, 160, 196, 63);
 		panel_6.add(txtAspirantesSecundaria);
 		
 		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(Color.WHITE);
 		panel_7.setBorder(new TitledBorder(null, "ASPIRANTES DE BACHILLERATO", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_5.add(panel_7);
 		panel_7.setLayout(null);
@@ -262,6 +276,9 @@ public class PrincipalGUI {
 		panel_7.add(btnValidar2);
 		
 		txtAspirantesBachillerato = new JTextArea();
+		txtAspirantesBachillerato.setEditable(false);
+		txtAspirantesBachillerato.setWrapStyleWord(true);
+		txtAspirantesBachillerato.setLineWrap(true);
 		txtAspirantesBachillerato.setBounds(12, 133, 196, 90);
 		panel_7.add(txtAspirantesBachillerato);
 	}
