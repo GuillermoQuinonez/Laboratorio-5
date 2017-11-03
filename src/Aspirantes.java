@@ -10,6 +10,8 @@ public abstract class Aspirantes implements Comparable<Aspirantes>{
 	protected float notaEscalafon; 
 	protected float notaHistoria; 
 	
+	public Aspirantes() {}
+	
 	public Aspirantes(String nombre, String dpi, float notaEscalafon, float notaHistoria) {
 		this.nombre = nombre; 
 		this.dpi = dpi; 

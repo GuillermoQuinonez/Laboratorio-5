@@ -8,6 +8,8 @@ public class EgresadoBachillerato extends Aspirantes {
 	protected float nota4; 
 	protected float nota5;
 	
+	public EgresadoBachillerato() {}
+	
 	/**
 	 * @param nombre
 	 * @param dpi

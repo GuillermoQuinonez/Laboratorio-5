@@ -7,6 +7,8 @@
 public class DesvinculadoSecundaria extends EgresadoSecundaria {
 	private float notaAptitud;
 
+	public DesvinculadoSecundaria() {}
+	
 	/**
 	 * @param nombre
 	 * @param dpi

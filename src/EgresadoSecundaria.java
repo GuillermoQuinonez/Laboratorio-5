@@ -16,6 +16,9 @@ public class EgresadoSecundaria extends Aspirantes{
 	 * @param notaEscalafon
 	 * @param notaHistoria
 	 */
+	
+	public EgresadoSecundaria() {}
+	
 	public EgresadoSecundaria(String nombre, String dpi, float notaEscalafon, float notaHistoria, float notaMatematicas, float notaEspaniol, float nota1, float nota2, float nota3) {
 		super(nombre, dpi, notaEscalafon, notaHistoria);
 		this.notaMatematicas = notaMatematicas; 

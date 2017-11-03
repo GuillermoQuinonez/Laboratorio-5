@@ -6,6 +6,8 @@
  */
 public class DesvinculadoBachillerato extends EgresadoBachillerato {
 
+	public DesvinculadoBachillerato() {}
+	
 	/**
 	 * @param nombre
 	 * @param dpi
