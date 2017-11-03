@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -66,6 +67,7 @@ public class PrincipalGUI {
 		frmEscalafnDeAspirantes = new JFrame();
 		frmEscalafnDeAspirantes.getContentPane().setBackground(Color.WHITE);
 		frmEscalafnDeAspirantes.setTitle("ESCALAF\u00D3N DE ASPIRANTES A PERITO CONTADOR");
+		frmEscalafnDeAspirantes.setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.jpg")).getImage());
 		frmEscalafnDeAspirantes.setBounds(100, 100, 910, 525);
 		frmEscalafnDeAspirantes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEscalafnDeAspirantes.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
@@ -254,6 +256,7 @@ public class PrincipalGUI {
 		panel_6.add(btnValidar);
 		
 		txtAspirantesSecundaria = new JTextArea();
+		txtAspirantesSecundaria.setBackground(UIManager.getColor("EditorPane.selectionBackground"));
 		txtAspirantesSecundaria.setEditable(false);
 		txtAspirantesSecundaria.setWrapStyleWord(true);
 		txtAspirantesSecundaria.setLineWrap(true);
@@ -276,6 +279,7 @@ public class PrincipalGUI {
 		panel_7.add(btnValidar2);
 		
 		txtAspirantesBachillerato = new JTextArea();
+		txtAspirantesBachillerato.setBackground(UIManager.getColor("EditorPane.selectionBackground"));
 		txtAspirantesBachillerato.setEditable(false);
 		txtAspirantesBachillerato.setWrapStyleWord(true);
 		txtAspirantesBachillerato.setLineWrap(true);
