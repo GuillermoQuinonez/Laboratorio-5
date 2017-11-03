@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -7,22 +6,34 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class PrincipalGUI {
 
-	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private JFrame frmEscalafnDeAspirantes;
+	private JTextField tfNombre;
+	private JTextField tfDpi;
+	private JComboBox<String> cbTipo;
+	private JTextField tfNota1;
+	private JTextField tfHistoria;
+	private JTextField tfNota2;
+	private JTextField tfEspaniol;
+	private JTextField tfNota3;
+	private JTextField tfMatematicas;
+	private JTextField tfAspirantesSecundaria;
+	private JButton btnGuardar;
+	private JButton btnActualizar;
+	private JButton btnValidar;
+	private JButton btnValidar2;
+	private JTextArea txtEscalafon;
+	private JTextArea txtAspirantesSecundaria;
+	private JTextArea txtAspirantesBachillerato;
 
 	/**
 	 * Launch the application.
@@ -32,7 +43,8 @@ public class PrincipalGUI {
 			public void run() {
 				try {
 					PrincipalGUI window = new PrincipalGUI();
-					window.frame.setVisible(true);
+					window.frmEscalafnDeAspirantes.setVisible(true);
+					window.frmEscalafnDeAspirantes.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,151 +63,207 @@ public class PrincipalGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 744, 480);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmEscalafnDeAspirantes = new JFrame();
+		frmEscalafnDeAspirantes.setTitle("ESCALAF\u00D3N DE ASPIRANTES A PERITO CONTADOR");
+		frmEscalafnDeAspirantes.setBounds(100, 100, 910, 525);
+		frmEscalafnDeAspirantes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmEscalafnDeAspirantes.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblIngresar = new JLabel("INGRESAR");
-		lblIngresar.setFont(new Font("Palatino Linotype", Font.BOLD, 14));
-		lblIngresar.setBounds(12, 13, 87, 28);
-		frame.getContentPane().add(lblIngresar);
+		JPanel panel_1 = new JPanel();
+		frmEscalafnDeAspirantes.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nombre:");
-		lblNewLabel.setBounds(12, 54, 56, 16);
-		frame.getContentPane().add(lblNewLabel);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(0, 0, 446, 200);
+		panel_2.setBorder(new TitledBorder(null, "INGRESO DE DATOS DEL ASPIRANTE ", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
+		panel_1.add(panel_2);
+		panel_2.setLayout(new GridLayout(3, 2, 5, 5));
 		
-		JLabel lblDpi = new JLabel("D.P.I.:");
-		lblDpi.setBounds(12, 83, 56, 16);
-		frame.getContentPane().add(lblDpi);
+		JLabel lblNombre = new JLabel("NOMBRE");
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNombre);
 		
-		textField = new JTextField();
-		textField.setBounds(72, 80, 116, 22);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		tfNombre = new JTextField();
+		tfNombre.setForeground(Color.BLUE);
+		tfNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(tfNombre);
+		tfNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(72, 51, 116, 22);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		JLabel lblDpi = new JLabel("DPI");
+		lblDpi.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblDpi);
+		
+		tfDpi = new JTextField();
+		tfDpi.setForeground(Color.BLUE);
+		tfDpi.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(tfDpi);
+		tfDpi.setColumns(10);
 		
 		JLabel lblTipo = new JLabel("TIPO");
-		lblTipo.setFont(new Font("Segoe UI Light", Font.BOLD, 14));
-		lblTipo.setBounds(12, 129, 56, 16);
-		frame.getContentPane().add(lblTipo);
+		lblTipo.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblTipo);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(40, 168, 121, 22);
-		frame.getContentPane().add(comboBox);
+		cbTipo = new JComboBox<>();
+		cbTipo.addItem("Egresado de Secundaria");
+		cbTipo.addItem("Desvinculado de Secundaria");
+		cbTipo.addItem("Egresado de Bachillerato");
+		cbTipo.addItem("Desvinculado de Bachillerato");
+		panel_2.add(cbTipo);
 		
-		JLabel lblNotasDelColegio = new JLabel("NOTAS DEL COLEGIO");
-		lblNotasDelColegio.setFont(new Font("Segoe UI Light", Font.BOLD, 14));
-		lblNotasDelColegio.setBounds(12, 215, 160, 16);
-		frame.getContentPane().add(lblNotasDelColegio);
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(0, 200, 446, 277);
+		panel_3.setBorder(new TitledBorder(null, "Ingreso de Notas", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+		panel_1.add(panel_3);
+		panel_3.setLayout(null);
 		
-		JLabel lblNota = new JLabel("Nota");
-		lblNota.setBounds(12, 255, 56, 16);
-		frame.getContentPane().add(lblNota);
+		JLabel lblNotasDeEstudio = new JLabel("NOTAS DE ESTUDIOS");
+		lblNotasDeEstudio.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNotasDeEstudio.setBounds(7, 19, 213, 46);
+		lblNotasDeEstudio.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNotasDeEstudio);
 		
-		JLabel lblNota_1 = new JLabel("Nota");
-		lblNota_1.setBounds(12, 284, 56, 16);
-		frame.getContentPane().add(lblNota_1);
+		JLabel lblNotasDeExmenes = new JLabel("NOTAS DE EX\u00C1MENES");
+		lblNotasDeExmenes.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNotasDeExmenes.setBounds(225, 19, 213, 46);
+		lblNotasDeExmenes.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNotasDeExmenes);
 		
-		JLabel lblNota_2 = new JLabel("Nota");
-		lblNota_2.setBounds(12, 313, 56, 16);
-		frame.getContentPane().add(lblNota_2);
+		JLabel lblNota = new JLabel("Nota 1 / Nota 4");
+		lblNota.setBounds(7, 70, 104, 46);
+		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNota);
 		
-		JLabel lblNota_3 = new JLabel("Nota");
-		lblNota_3.setBounds(12, 342, 56, 16);
-		frame.getContentPane().add(lblNota_3);
+		tfNota1 = new JTextField();
+		tfNota1.setBounds(116, 70, 104, 46);
+		tfNota1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(tfNota1);
+		tfNota1.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(45, 252, 56, 22);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		JLabel lblNotaHistoria = new JLabel("Nota Historia");
+		lblNotaHistoria.setBounds(225, 70, 104, 46);
+		lblNotaHistoria.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNotaHistoria);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(45, 284, 56, 22);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		tfHistoria = new JTextField();
+		tfHistoria.setBounds(334, 70, 104, 46);
+		tfHistoria.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(tfHistoria);
+		tfHistoria.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(45, 313, 56, 22);
-		frame.getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		JLabel lblNotaNota = new JLabel("Nota 2/ Nota 5");
+		lblNotaNota.setBounds(7, 121, 104, 46);
+		lblNotaNota.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNotaNota);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(45, 339, 54, 22);
-		frame.getContentPane().add(textField_5);
-		textField_5.setColumns(10);
+		tfNota2 = new JTextField();
+		tfNota2.setBounds(116, 121, 104, 46);
+		tfNota2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(tfNota2);
+		tfNota2.setColumns(10);
 		
-		JLabel lblNota_4 = new JLabel("Nota");
-		lblNota_4.setBounds(12, 371, 56, 16);
-		frame.getContentPane().add(lblNota_4);
+		JLabel lblNotaEspaol = new JLabel("Nota Espa\u00F1ol");
+		lblNotaEspaol.setBounds(225, 121, 104, 46);
+		lblNotaEspaol.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNotaEspaol);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(45, 368, 56, 22);
-		frame.getContentPane().add(textField_6);
-		textField_6.setColumns(10);
+		tfEspaniol = new JTextField();
+		tfEspaniol.setBounds(334, 121, 104, 46);
+		tfEspaniol.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(tfEspaniol);
+		tfEspaniol.setColumns(10);
 		
-		JLabel lblNotasExamenes = new JLabel("NOTAS EXAMENES");
-		lblNotasExamenes.setFont(new Font("Segoe UI Light", Font.BOLD, 14));
-		lblNotasExamenes.setBounds(184, 215, 134, 16);
-		frame.getContentPane().add(lblNotasExamenes);
+		JLabel lblNota_1 = new JLabel("Nota 3");
+		lblNota_1.setBounds(7, 172, 104, 46);
+		lblNota_1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNota_1);
 		
-		JLabel lblHistoria = new JLabel("Historia:");
-		lblHistoria.setBounds(179, 258, 56, 16);
-		frame.getContentPane().add(lblHistoria);
+		tfNota3 = new JTextField();
+		tfNota3.setBounds(116, 172, 104, 46);
+		tfNota3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(tfNota3);
+		tfNota3.setColumns(10);
 		
-		JLabel lblEspaol = new JLabel("Espa\u00F1ol:");
-		lblEspaol.setBounds(179, 301, 56, 16);
-		frame.getContentPane().add(lblEspaol);
+		JLabel lblNotaMatemticas = new JLabel("Nota Matem\u00E1ticas");
+		lblNotaMatemticas.setBounds(225, 172, 104, 46);
+		lblNotaMatemticas.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNotaMatemticas);
 		
-		JLabel lblMatematicas = new JLabel("Matematicas:");
-		lblMatematicas.setBounds(179, 342, 77, 16);
-		frame.getContentPane().add(lblMatematicas);
+		tfMatematicas = new JTextField();
+		tfMatematicas.setBounds(334, 172, 104, 46);
+		tfMatematicas.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(tfMatematicas);
+		tfMatematicas.setColumns(10);
 		
-		textField_7 = new JTextField();
-		textField_7.setBounds(247, 252, 56, 22);
-		frame.getContentPane().add(textField_7);
-		textField_7.setColumns(10);
+		btnGuardar = new JButton("GUARDAR");
+		btnGuardar.setBounds(37, 223, 153, 46);
+		panel_3.add(btnGuardar);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(247, 298, 56, 22);
-		frame.getContentPane().add(textField_8);
+		btnActualizar = new JButton("ACTUALIZAR");
+		btnActualizar.setBounds(254, 223, 153, 46);
+		panel_3.add(btnActualizar);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(268, 339, 56, 22);
-		frame.getContentPane().add(textField_9);
+		JPanel panel = new JPanel();
+		frmEscalafnDeAspirantes.getContentPane().add(panel);
+		panel.setLayout(new GridLayout(2, 1, 5, 5));
 		
-		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setBounds(206, 395, 97, 25);
-		frame.getContentPane().add(btnIngresar);
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new TitledBorder(null, "ESCALAF\u00D3N", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+		panel.add(panel_4);
+		panel_4.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(652, 13, 21, 193);
-		frame.getContentPane().add(scrollBar);
+		/*JScrollPane scrollPane = new JScrollPane();
+		panel_4.add(scrollPane);*/
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		textArea.setBounds(405, 14, 268, 193);
-		JScrollBar scrollBar = new JScrollBar(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frame.getContentPane().add(textArea);
+		txtEscalafon = new JTextArea();
+		txtEscalafon.setLineWrap(true);
+		txtEscalafon.setWrapStyleWord(true);
+		JScrollPane scrollPane = new JScrollPane(txtEscalafon, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		panel_4.add(scrollPane);
 		
+		JPanel panel_5 = new JPanel();
+		panel.add(panel_5);
+		panel_5.setLayout(new GridLayout(1, 2, 5, 5));
 		
-		JButton btnEscalafn = new JButton("Escalaf\u00F3n");
-		btnEscalafn.setBounds(490, 212, 97, 25);
-		frame.getContentPane().add(btnEscalafn);
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "ASPIRANTES DE SECUNDARIA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_5.add(panel_6);
+		panel_6.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Nota mayor a 80%");
-		btnNewButton.setBounds(405, 280, 182, 25);
-		frame.getContentPane().add(btnNewButton);
+		JLabel lblIngresarPromedio = new JLabel("Ingresar promedio");
+		lblIngresarPromedio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIngresarPromedio.setBounds(12, 32, 196, 29);
+		panel_6.add(lblIngresarPromedio);
 		
-		JButton btnVerificador = new JButton("Verificador");
-		btnVerificador.setBounds(405, 338, 97, 25);
-		frame.getContentPane().add(btnVerificador);
+		tfAspirantesSecundaria = new JTextField();
+		tfAspirantesSecundaria.setBounds(12, 67, 196, 29);
+		panel_6.add(tfAspirantesSecundaria);
+		tfAspirantesSecundaria.setColumns(10);
+		
+		btnValidar = new JButton("VALIDAR");
+		btnValidar.setBounds(57, 109, 108, 37);
+		panel_6.add(btnValidar);
+		
+		txtAspirantesSecundaria = new JTextArea();
+		txtAspirantesSecundaria.setBounds(12, 160, 196, 63);
+		panel_6.add(txtAspirantesSecundaria);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new TitledBorder(null, "ASPIRANTES DE BACHILLERATO", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_5.add(panel_7);
+		panel_7.setLayout(null);
+		
+		JLabel lblElPromedioEs = new JLabel("El promedio es mayor a 80");
+		lblElPromedioEs.setHorizontalAlignment(SwingConstants.CENTER);
+		lblElPromedioEs.setBounds(12, 29, 196, 42);
+		panel_7.add(lblElPromedioEs);
+		
+		btnValidar2 = new JButton("VALIDAR");
+		btnValidar2.setBounds(51, 84, 106, 34);
+		panel_7.add(btnValidar2);
+		
+		txtAspirantesBachillerato = new JTextArea();
+		txtAspirantesBachillerato.setBounds(12, 133, 196, 90);
+		panel_7.add(txtAspirantesBachillerato);
 	}
+
 }
