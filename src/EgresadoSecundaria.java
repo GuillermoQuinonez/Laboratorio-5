@@ -19,8 +19,23 @@ public class EgresadoSecundaria extends Aspirantes{
 	 * @param notaHistoria
 	 */
 	
-	public EgresadoSecundaria() {}
+	/**
+	 * Constructor sin parámetros
+	 */
+	public EgresadoSecundaria() {}//Fin del método
 	
+	/**
+	 * Constructor con parámteros de la clase
+	 * @param nombre: String
+	 * @param dpi: String
+	 * @param notaEscalafon: float
+	 * @param notaHistoria: float
+	 * @param notaMatematicas: float
+	 * @param notaEspaniol: float
+	 * @param nota1: float
+	 * @param nota2: float
+	 * @param nota3: flat
+	 */
 	public EgresadoSecundaria(String nombre, String dpi, float notaEscalafon, float notaHistoria, float notaMatematicas, float notaEspaniol, float nota1, float nota2, float nota3) {
 		super(nombre, dpi, notaEscalafon, notaHistoria);
 		this.notaMatematicas = notaMatematicas; 
@@ -28,14 +43,14 @@ public class EgresadoSecundaria extends Aspirantes{
 		this.nota1 = nota1; 
 		this.nota2 = nota2; 
 		this.nota3 = nota3; 
-	}
+	}//Fin del método
 	
 	/**
 	 * @return the notaMatematicas
 	 */
 	public float getNotaMatematicas() {
 		return notaMatematicas;
-	}
+	}//Fin del método
 
 
 	/**
@@ -43,7 +58,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public void setNotaMatematicas(float notaMatematicas) {
 		this.notaMatematicas = notaMatematicas;
-	}
+	}//Fin del método
 
 
 	/**
@@ -51,7 +66,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public float getNotaEspaniol() {
 		return notaEspaniol;
-	}
+	}//Fin del método
 
 
 	/**
@@ -59,7 +74,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public void setNotaEspaniol(float notaEspaniol) {
 		this.notaEspaniol = notaEspaniol;
-	}
+	}//Fin del método
 
 
 	/**
@@ -67,7 +82,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public float getNota1() {
 		return nota1;
-	}
+	}//Fin del método
 
 
 	/**
@@ -75,7 +90,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public void setNota1(float nota1) {
 		this.nota1 = nota1;
-	}
+	}//Fin del método
 
 
 	/**
@@ -83,7 +98,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public float getNota2() {
 		return nota2;
-	}
+	}//Fin del método
 
 
 	/**
@@ -91,7 +106,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public void setNota2(float nota2) {
 		this.nota2 = nota2;
-	}
+	}//Fin del método
 
 
 	/**
@@ -99,7 +114,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public float getNota3() {
 		return nota3;
-	}
+	}//Fin del método
 
 
 	/**
@@ -107,7 +122,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	public void setNota3(float nota3) {
 		this.nota3 = nota3;
-	}
+	}//Fin del método
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -116,7 +131,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	public String toString() {
 		return "EgresadoSecundaria [notaMatematicas=" + notaMatematicas + ", notaEspaniol=" + notaEspaniol + ", nota1="
 				+ nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
-	}
+	}//Fin del método
 
 
 	/* (non-Javadoc)
@@ -128,7 +143,7 @@ public class EgresadoSecundaria extends Aspirantes{
 		float PromedioExamenes = (float) ((notaHistoria + notaMatematicas + notaEspaniol)/3.0); 
 		float NotaEgresadoSecundaria = (float) ((0.6*PromedioNotasEstudio) + (0.4*(PromedioExamenes))); 
 		this.notaEscalafon = NotaEgresadoSecundaria; 
-	} 
+	}//Fin del método 
 	
 	
-}
+}//Fin de la clase

@@ -10,19 +10,23 @@ import org.mongodb.morphia.annotations.Entity;
 @Entity(value="Aspirantes")
 public class DesvinculadoBachillerato extends EgresadoBachillerato {
 
-	public DesvinculadoBachillerato() {}
+	/**
+	 * Constructor sin parámetros
+	 */
+	public DesvinculadoBachillerato() {}//Fin del método
 	
 	/**
-	 * @param nombre
-	 * @param dpi
-	 * @param notaEscalafon
-	 * @param notaHistoria
-	 * @param nota4
-	 * @param nota5
+	 * Constructor con parámetros de la clase
+	 * @param nombre: String
+	 * @param dpi: String
+	 * @param notaEscalafon: float
+	 * @param notaHistoria: float
+	 * @param nota4: float
+	 * @param nota5: float
 	 */
 	public DesvinculadoBachillerato(String nombre, String dpi, float notaEscalafon, float notaHistoria, float nota4, float nota5) {
 		super(nombre, dpi, notaEscalafon, notaHistoria, nota4, nota5);
-	}
+	}//Fin del método
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -30,7 +34,7 @@ public class DesvinculadoBachillerato extends EgresadoBachillerato {
 	@Override
 	public String toString() {
 		return "DesvinculadoBachillerato []";
-	}
+	}//Fin del método
 
 	/* (non-Javadoc)
 	 * @see EgresadoBachillerato#NotaParaEscalafon()
@@ -41,7 +45,6 @@ public class DesvinculadoBachillerato extends EgresadoBachillerato {
 		float PromedioExamenes = notaHistoria; 
 		float NotaDesvinculadoBachillerato = (float) ((0.4*PromedioNotasEstudio) + (0.6*PromedioExamenes)); 
 		this.notaEscalafon = NotaDesvinculadoBachillerato; 
-	} 
+	} //Fin del método
 	
-	
-}
+}//Fin de la clase

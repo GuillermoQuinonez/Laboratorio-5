@@ -2,7 +2,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -13,20 +12,22 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
-
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-
+/**
+ * @file PrincipalGUI.java
+ * @author José Guillermo Quiñónez Castillo <qui17775@uvg.edu.gt>
+ * @author Estuardo Ureta 17010 <ure17010@uvg.edu.gt>
+ * @version 4/11/2017 
+ */
 public class PrincipalGUI {
 
 	private JFrame frmEscalafnDeAspirantes;
@@ -61,10 +62,6 @@ public class PrincipalGUI {
 		catch(Exception e) {
 			System.out.println("No se pudo hacer la conexion");
 		}
-		/*MongoClient mongo = new MongoClient();
-	    Morphia morphia = new Morphia();
-	    morphia.map(Aspirantes.class).map(EgresadoSecundaria.class).map(DesvinculadoSecundaria.class).map(EgresadoBachillerato.class).map(DesvinculadoBachillerato.class); // clases a guardar
-	    ds = morphia.createDatastore(mongo, "Aspirantes"); // Base Datos*/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -76,14 +73,13 @@ public class PrincipalGUI {
 				}
 			}
 		});
-	}
+	}//Fin del método
 
 	/**
 	 * Create the application.
 	 */
 	public PrincipalGUI() {
 		initialize();
-		//cotrolador = new ControlEscalafon();
 	}
 
 	/**
@@ -325,7 +321,7 @@ public class PrincipalGUI {
 		txtAspirantesBachillerato.setLineWrap(true);
 		txtAspirantesBachillerato.setBounds(12, 133, 196, 90);
 		panel_7.add(txtAspirantesBachillerato);
-	}
+	}//Fin del método
 	
 	public class Listener implements ActionListener{
 
@@ -374,9 +370,9 @@ public class PrincipalGUI {
 				}
 			}
 			
-		}
+		}//Fin del método
 		
-	}
+	}//Fin de la clase
 	
 	public class CbListener implements ItemListener{
 		@Override
@@ -422,8 +418,8 @@ public class PrincipalGUI {
 				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
 				notaaptitud.setEditable(false);
 			}
-		}
+		}//Fin del método
 		
-	}
+	}//Fin de la clase
 	
-}
+}//Fin de la clase principal
