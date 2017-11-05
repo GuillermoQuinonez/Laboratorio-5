@@ -1,19 +1,31 @@
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class PrincipalGUI {
 
@@ -21,25 +33,38 @@ public class PrincipalGUI {
 	private JTextField tfNombre;
 	private JTextField tfDpi;
 	private JComboBox<String> cbTipo;
-	private JTextField tfNota1;
-	private JTextField tfHistoria;
-	private JTextField tfNota2;
-	private JTextField tfEspaniol;
-	private JTextField tfNota3;
-	private JTextField tfMatematicas;
-	private JTextField tfAspirantesSecundaria;
 	private JButton btnGuardar;
-	private JButton btnActualizar;
 	private JButton btnValidar;
 	private JButton btnValidar2;
 	private JTextArea txtEscalafon;
 	private JTextArea txtAspirantesSecundaria;
 	private JTextArea txtAspirantesBachillerato;
+	private static ControlEscalafon controlador; 
+	private JButton btnActualizar;
+	private JSpinner tfNota1;
+	private JSpinner tfNota2;
+	private JSpinner tfNota3;
+	private JSpinner tfAptitud;
+	private JSpinner tfHistoria;
+	private JSpinner tfEspaniol;
+	private JSpinner tfMatematicas;
+	private JSpinner tfPromedioIngresado;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		controlador = new ControlEscalafon();
+		try {
+			controlador.Conexion();
+		}
+		catch(Exception e) {
+			System.out.println("No se pudo hacer la conexion");
+		}
+		/*MongoClient mongo = new MongoClient();
+	    Morphia morphia = new Morphia();
+	    morphia.map(Aspirantes.class).map(EgresadoSecundaria.class).map(DesvinculadoSecundaria.class).map(EgresadoBachillerato.class).map(DesvinculadoBachillerato.class); // clases a guardar
+	    ds = morphia.createDatastore(mongo, "Aspirantes"); // Base Datos*/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -58,6 +83,7 @@ public class PrincipalGUI {
 	 */
 	public PrincipalGUI() {
 		initialize();
+		//cotrolador = new ControlEscalafon();
 	}
 
 	/**
@@ -112,7 +138,9 @@ public class PrincipalGUI {
 		panel_2.add(lblTipo);
 		
 		cbTipo = new JComboBox<>();
+		cbTipo.addItemListener(new CbListener());
 		cbTipo.setBackground(UIManager.getColor("EditorPane.selectionBackground"));
+		cbTipo.addItem("Seleccione el tipo de aspirante");
 		cbTipo.addItem("Egresado de Secundaria");
 		cbTipo.addItem("Desvinculado de Secundaria");
 		cbTipo.addItem("Egresado de Bachillerato");
@@ -143,74 +171,77 @@ public class PrincipalGUI {
 		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNota);
 		
-		tfNota1 = new JTextField();
-		tfNota1.setBounds(116, 70, 104, 46);
-		tfNota1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(tfNota1);
-		tfNota1.setColumns(10);
-		
 		JLabel lblNotaHistoria = new JLabel("Nota Historia");
 		lblNotaHistoria.setBounds(225, 70, 104, 46);
 		lblNotaHistoria.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNotaHistoria);
-		
-		tfHistoria = new JTextField();
-		tfHistoria.setBounds(334, 70, 104, 46);
-		tfHistoria.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(tfHistoria);
-		tfHistoria.setColumns(10);
 		
 		JLabel lblNotaNota = new JLabel("Nota 2/ Nota 5");
 		lblNotaNota.setBounds(7, 121, 104, 46);
 		lblNotaNota.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNotaNota);
 		
-		tfNota2 = new JTextField();
-		tfNota2.setBounds(116, 121, 104, 46);
-		tfNota2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(tfNota2);
-		tfNota2.setColumns(10);
-		
 		JLabel lblNotaEspaol = new JLabel("Nota Espa\u00F1ol");
 		lblNotaEspaol.setBounds(225, 121, 104, 46);
 		lblNotaEspaol.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNotaEspaol);
-		
-		tfEspaniol = new JTextField();
-		tfEspaniol.setBounds(334, 121, 104, 46);
-		tfEspaniol.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(tfEspaniol);
-		tfEspaniol.setColumns(10);
 		
 		JLabel lblNota_1 = new JLabel("Nota 3");
 		lblNota_1.setBounds(7, 172, 104, 46);
 		lblNota_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNota_1);
 		
-		tfNota3 = new JTextField();
-		tfNota3.setBounds(116, 172, 104, 46);
-		tfNota3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(tfNota3);
-		tfNota3.setColumns(10);
-		
 		JLabel lblNotaMatemticas = new JLabel("Nota Matem\u00E1ticas");
 		lblNotaMatemticas.setBounds(225, 172, 104, 46);
 		lblNotaMatemticas.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNotaMatemticas);
 		
-		tfMatematicas = new JTextField();
-		tfMatematicas.setBounds(334, 172, 104, 46);
-		tfMatematicas.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(tfMatematicas);
-		tfMatematicas.setColumns(10);
-		
 		btnGuardar = new JButton("GUARDAR");
-		btnGuardar.setBounds(37, 223, 153, 46);
+		btnGuardar.addActionListener(new Listener());
+		btnGuardar.setBounds(251, 223, 153, 46);
 		panel_3.add(btnGuardar);
 		
-		btnActualizar = new JButton("ACTUALIZAR");
-		btnActualizar.setBounds(254, 223, 153, 46);
-		panel_3.add(btnActualizar);
+		JLabel lblNotaEDe = new JLabel("E. de aptitud");
+		lblNotaEDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNotaEDe.setBounds(17, 231, 94, 33);
+		panel_3.add(lblNotaEDe);
+		
+		tfNota1 = new JSpinner();
+		tfNota1.setForeground(Color.BLACK);
+		tfNota1.setBackground(Color.WHITE);
+		tfNota1.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfNota1.setBounds(116, 70, 104, 46);
+		panel_3.add(tfNota1);
+		
+		tfNota2 = new JSpinner();
+		tfNota2.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfNota2.setBounds(116, 121, 104, 46);
+		panel_3.add(tfNota2);
+		
+		tfNota3 = new JSpinner();
+		tfNota3.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfNota3.setBounds(116, 172, 104, 46);
+		panel_3.add(tfNota3);
+		
+		tfAptitud = new JSpinner();
+		tfAptitud.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfAptitud.setBounds(116, 223, 104, 46);
+		panel_3.add(tfAptitud);
+		
+		tfHistoria = new JSpinner();
+		tfHistoria.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfHistoria.setBounds(334, 70, 104, 46);
+		panel_3.add(tfHistoria);
+		
+		tfEspaniol = new JSpinner();
+		tfEspaniol.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfEspaniol.setBounds(334, 121, 104, 46);
+		panel_3.add(tfEspaniol);
+		
+		tfMatematicas = new JSpinner();
+		tfMatematicas.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfMatematicas.setBounds(334, 172, 104, 46);
+		panel_3.add(tfMatematicas);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -221,17 +252,22 @@ public class PrincipalGUI {
 		panel_4.setBackground(Color.WHITE);
 		panel_4.setBorder(new TitledBorder(null, "ESCALAF\u00D3N", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel.add(panel_4);
-		panel_4.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		/*JScrollPane scrollPane = new JScrollPane();
-		panel_4.add(scrollPane);*/
+		panel_4.setLayout(null);
+	
 		
 		txtEscalafon = new JTextArea();
 		txtEscalafon.setEditable(false);
-		txtEscalafon.setLineWrap(true);
-		txtEscalafon.setWrapStyleWord(true);
-		JScrollPane scrollPane = new JScrollPane(txtEscalafon, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		panel_4.add(scrollPane);
+		txtEscalafon.setLineWrap(true); 
+		JScrollPane scroll = new JScrollPane(txtEscalafon,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setBounds(6, 18, 434, 160);
+		panel_4.add(scroll);
+		
+		btnActualizar = new JButton("ACTUALIZAR");
+		btnActualizar.addActionListener(new Listener());
+		btnActualizar.setBounds(165, 191, 116, 32);
+		panel_4.add(btnActualizar);
 		
 		JPanel panel_5 = new JPanel();
 		panel.add(panel_5);
@@ -248,13 +284,8 @@ public class PrincipalGUI {
 		lblIngresarPromedio.setBounds(12, 32, 196, 29);
 		panel_6.add(lblIngresarPromedio);
 		
-		tfAspirantesSecundaria = new JTextField();
-		tfAspirantesSecundaria.setHorizontalAlignment(SwingConstants.CENTER);
-		tfAspirantesSecundaria.setBounds(12, 67, 196, 29);
-		panel_6.add(tfAspirantesSecundaria);
-		tfAspirantesSecundaria.setColumns(10);
-		
 		btnValidar = new JButton("VALIDAR");
+		btnValidar.addActionListener(new Listener());
 		btnValidar.setBounds(57, 109, 108, 37);
 		panel_6.add(btnValidar);
 		
@@ -265,6 +296,11 @@ public class PrincipalGUI {
 		txtAspirantesSecundaria.setLineWrap(true);
 		txtAspirantesSecundaria.setBounds(12, 160, 196, 63);
 		panel_6.add(txtAspirantesSecundaria);
+		
+		tfPromedioIngresado = new JSpinner();
+		tfPromedioIngresado.setModel(new SpinnerNumberModel(new Float(0), new Float(0), new Float(100), new Float(1)));
+		tfPromedioIngresado.setBounds(12, 59, 196, 37);
+		panel_6.add(tfPromedioIngresado);
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBackground(Color.WHITE);
@@ -278,6 +314,7 @@ public class PrincipalGUI {
 		panel_7.add(lblElPromedioEs);
 		
 		btnValidar2 = new JButton("VALIDAR");
+		btnValidar2.addActionListener(new Listener());
 		btnValidar2.setBounds(51, 84, 106, 34);
 		panel_7.add(btnValidar2);
 		
@@ -289,5 +326,104 @@ public class PrincipalGUI {
 		txtAspirantesBachillerato.setBounds(12, 133, 196, 90);
 		panel_7.add(txtAspirantesBachillerato);
 	}
+	
+	public class Listener implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if(arg0.getSource() == btnGuardar) {
+				if(tfNombre.getText().compareTo("") == 0 || tfDpi.getText().compareTo("") == 0) {
+					JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos", "Campos Vacios", 2);
+				}
+				if(cbTipo.getSelectedIndex() == 0) {
+					JOptionPane.showMessageDialog(null, "Seleccione el tipo de aspirante", "Selección incorrecta", 2);
+				}
+				else {
+					if(cbTipo.getSelectedIndex() == 1) {
+						controlador.GuardarAspirante(1, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), Float.parseFloat(tfMatematicas.getValue().toString()), Float.parseFloat(tfEspaniol.getValue().toString()), Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), Float.parseFloat(tfNota3.getValue().toString()), 0);
+					}
+					else if(cbTipo.getSelectedIndex() == 2) {
+						controlador.GuardarAspirante(1, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), Float.parseFloat(tfMatematicas.getValue().toString()), Float.parseFloat(tfEspaniol.getValue().toString()), Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), Float.parseFloat(tfNota3.getValue().toString()), Float.parseFloat(tfAptitud.getValue().toString()));
+					}
+					else if(cbTipo.getSelectedIndex() == 3) {
+						controlador.GuardarAspirante(3, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), 0, 0, Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), 0, 0);
+						
+					}
+					else if(cbTipo.getSelectedIndex() == 4) {
+						controlador.GuardarAspirante(4, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), 0, 0, Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), 0, 0);
+					}
+					txtEscalafon.setText("");
+				}
+				
+			}
+			if(arg0.getSource() == btnValidar) {
+				float valor = Float.parseFloat(tfPromedioIngresado.getValue().toString()); 
+				txtAspirantesSecundaria.setText(controlador.PromedioSecundariaMayorA(valor));
+			}
+			if(arg0.getSource() == btnValidar2) {
+				txtAspirantesBachillerato.setText(controlador.BachilleratoMitadSuperior());
+			}
+			if(arg0.getSource() == btnActualizar) {
+				txtEscalafon.setText("");
+				txtEscalafon.setText("********************************** ASPIRANTES *********************************");
+				for(Aspirantes miaspirante: controlador.OrdenarParaEscalafon()) {
+					String nombre = miaspirante.getNombre(); 
+					String clase = miaspirante.getClass().toString(); 
+					String nota = String.valueOf(miaspirante.getNotaEscalafon()); 
+					txtEscalafon.setText(txtEscalafon.getText() + "\n" + nombre + " (" + clase + ") : " + nota);	
+				}
+			}
+			
+		}
+		
+	}
+	
+	public class CbListener implements ItemListener{
+		@Override
+		public void itemStateChanged(ItemEvent arg0) {
+			if(cbTipo.getSelectedIndex() == 1) {
+				JFormattedTextField nota3 = ((JSpinner.DefaultEditor) tfNota3.getEditor()).getTextField();
+				nota3.setEditable(true);
+				JFormattedTextField notamatematicas = ((JSpinner.DefaultEditor) tfMatematicas.getEditor()).getTextField();
+				notamatematicas.setEditable(true);
+				JFormattedTextField notaespaniol = ((JSpinner.DefaultEditor) tfEspaniol.getEditor()).getTextField();
+				notaespaniol.setEditable(true);
+				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
+				notaaptitud.setEditable(false);
+				
+			}
+			if(cbTipo.getSelectedIndex() == 2) {
+				JFormattedTextField nota3 = ((JSpinner.DefaultEditor) tfNota3.getEditor()).getTextField();
+				nota3.setEditable(true);
+				JFormattedTextField notamatematicas = ((JSpinner.DefaultEditor) tfMatematicas.getEditor()).getTextField();
+				notamatematicas.setEditable(true);
+				JFormattedTextField notaespaniol = ((JSpinner.DefaultEditor) tfEspaniol.getEditor()).getTextField();
+				notaespaniol.setEditable(true);
+				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
+				notaaptitud.setEditable(true);
+			}
+			if(cbTipo.getSelectedIndex() == 3) {
+				JFormattedTextField nota3 = ((JSpinner.DefaultEditor) tfNota3.getEditor()).getTextField();
+				nota3.setEditable(false);
+				JFormattedTextField notamatematicas = ((JSpinner.DefaultEditor) tfMatematicas.getEditor()).getTextField();
+				notamatematicas.setEditable(false);
+				JFormattedTextField notaespaniol = ((JSpinner.DefaultEditor) tfEspaniol.getEditor()).getTextField();
+				notaespaniol.setEditable(false);
+				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
+				notaaptitud.setEditable(false);
+			}
+			if(cbTipo.getSelectedIndex() == 4) {
+				JFormattedTextField nota3 = ((JSpinner.DefaultEditor) tfNota3.getEditor()).getTextField();
+				nota3.setEditable(false);
+				JFormattedTextField notamatematicas = ((JSpinner.DefaultEditor) tfMatematicas.getEditor()).getTextField();
+				notamatematicas.setEditable(false);
+				JFormattedTextField notaespaniol = ((JSpinner.DefaultEditor) tfEspaniol.getEditor()).getTextField();
+				notaespaniol.setEditable(false);
+				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
+				notaaptitud.setEditable(false);
+			}
+		}
+		
+	}
+	
 }

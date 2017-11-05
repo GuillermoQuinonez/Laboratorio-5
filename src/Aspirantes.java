@@ -1,10 +1,16 @@
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
 /**
  * @file Aspirantes.java
  * @author José Guillermo Quiñónez Castillo <qui17775@uvg.edu.gt>
  * @author Estuardo Ureta 17010 <ure17010@uvg.edu.gt>
  * @version 2/11/2017 A
  */
+@Entity
 public abstract class Aspirantes implements Comparable<Aspirantes>{
+	@Id private ObjectId id; 
 	protected String nombre; 
 	protected String dpi; 
 	protected float notaEscalafon; 
@@ -89,10 +95,10 @@ public abstract class Aspirantes implements Comparable<Aspirantes>{
 	@Override
 	public int compareTo(Aspirantes a) {
 		if(notaEscalafon < a.getNotaEscalafon()) {
-			return -1; 
+			return 1; 
 		} 
 		if(notaEscalafon > a.getNotaEscalafon()) {
-			return 1; 
+			return -1; 
 		}
 		return 0; 
 	}
@@ -101,9 +107,5 @@ public abstract class Aspirantes implements Comparable<Aspirantes>{
 	 * Calcula la nota para el escalafon según las especificaciones de cada tipo de aspirante
 	 */
 	public abstract void NotaParaEscalafon(); 
-	
-	
-	
-	
 
 }

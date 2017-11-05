@@ -1,9 +1,11 @@
+import org.mongodb.morphia.annotations.Entity;
 /**
  * @file EgresadoSecundaria.java
  * @author José Guillermo Quiñónez Castillo <qui17775@uvg.edu.gt>
  * @author Estuardo Ureta 17010 <ure17010@uvg.edu.gt>
  * @version 2/11/2017 A
  */
+@Entity(value="Aspirantes")
 public class EgresadoSecundaria extends Aspirantes{
 	protected float notaMatematicas; 
 	protected float notaEspaniol; 
@@ -112,7 +114,7 @@ public class EgresadoSecundaria extends Aspirantes{
 	 */
 	@Override
 	public String toString() {
-		return "EgresadoSecundaria [ notaMatematicas=" + notaMatematicas + ", notaEspaniol=" + notaEspaniol + ", nota1="
+		return "EgresadoSecundaria [notaMatematicas=" + notaMatematicas + ", notaEspaniol=" + notaEspaniol + ", nota1="
 				+ nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
 	}
 
