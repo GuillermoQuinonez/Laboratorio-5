@@ -11,7 +11,7 @@ import org.mongodb.morphia.query.Query;
  * @file ControlEscalafon.java
  * @author José Guillermo Quiñónez Castillo <qui17775@uvg.edu.gt>
  * @author Estuardo Ureta 17010 <ure17010@uvg.edu.gt>
- * @version 4/11/2017 
+ * @version 6/11/2017 
  */
 @Entity(value="Aspirantes")
 public class ControlEscalafon {
@@ -47,7 +47,7 @@ public class ControlEscalafon {
 		MongoClient mongo = new MongoClient();
 	    Morphia morphia = new Morphia();
 	    morphia.map(Aspirantes.class); // clases a guardar
-	    ds = morphia.createDatastore(mongo, "Prueba2"); // Base Datos
+	    ds = morphia.createDatastore(mongo, "ASPIRANTES"); // Base Datos
 	}//Fin del método
 	
 	/**
@@ -64,23 +64,30 @@ public class ControlEscalafon {
 	 * @param nota2: float
 	 * @param nota3: float
 	 * @param notaAptitud: float
+	 * @throws Excepcion 
 	 */
-	public void GuardarAspirante(int tipo, String nombre, String dpi, float notaHistoria, float notaMatematicas, float notaEspaniol, float nota1, float nota2, float nota3, float notaAptitud) {
-		Aspirantes aspirante = null; 
-		if(tipo == 1) {
-			aspirante = new EgresadoSecundaria(nombre, dpi, 0, notaHistoria, notaMatematicas, notaEspaniol, nota1, nota2, nota3);
+	public void GuardarAspirante(int tipo, String nombre, String dpi, float notaHistoria, float notaMatematicas, float notaEspaniol, float nota1, float nota2, float nota3, float notaAptitud) throws Excepcion {
+		if(nombre.compareTo("") == 0 || nombre.compareTo("") == 0) {
+			Excepcion excepcion = new Excepcion("No puede dejar campos vacíos");
+			throw excepcion; 
 		}
-		else if(tipo == 2) {
-			aspirante = new DesvinculadoSecundaria(nombre, dpi, 0, notaHistoria, notaMatematicas, notaEspaniol, nota1, nota2, nota3, notaAptitud);
+		else {
+			Aspirantes aspirante = null; 
+			if(tipo == 1) {
+				aspirante = new EgresadoSecundaria(nombre, dpi, 0, notaHistoria, notaMatematicas, notaEspaniol, nota1, nota2, nota3);
+			}
+			else if(tipo == 2) {
+				aspirante = new DesvinculadoSecundaria(nombre, dpi, 0, notaHistoria, notaMatematicas, notaEspaniol, nota1, nota2, nota3, notaAptitud);
+			}
+			else if(tipo == 3) {
+				aspirante = new EgresadoBachillerato(nombre, dpi, 0, notaHistoria, nota1, nota2);
+			}
+			else if(tipo == 4) {
+				aspirante = new DesvinculadoBachillerato(nombre, dpi, 0, notaHistoria, nota1, nota2);
+			}
+			aspirante.NotaParaEscalafon();
+			ds.save((Aspirantes)aspirante); 
 		}
-		else if(tipo == 3) {
-			aspirante = new EgresadoBachillerato(nombre, dpi, 0, notaHistoria, nota1, nota2);
-		}
-		else if(tipo == 4) {
-			aspirante = new DesvinculadoBachillerato(nombre, dpi, 0, notaHistoria, nota1, nota2);
-		}
-		aspirante.NotaParaEscalafon();
-		ds.save((Aspirantes)aspirante); 
 	}//Fin del método
 	
 	/**
@@ -103,8 +110,9 @@ public class ControlEscalafon {
 	 * con el valor ingresado y devuelve una cadena indicando si el promedio es mayor o menor al ingresado. 
 	 * @param valor: float
 	 * @return validación: String
+	 * @throws Excepcion 
 	 */
-	public String PromedioSecundariaMayorA(float valor) {
+	public String PromedioSecundariaMayorA(float valor) throws Excepcion {
 		String validacion = "";  
 		float suma = 0; 
 		int total = 0; 
@@ -114,22 +122,29 @@ public class ControlEscalafon {
 				total ++; 
 			}
 		}
-		float promedio = suma/total; 
-		if(promedio > valor) {
-			validacion =  "El promedio de los estudiantes desvinculados graduados de secundaria es mayor a "+ valor + "\n" + " Tiene un valor de " + formato.format(promedio); 
+		if(total == 0) {
+			Excepcion excepcion = new Excepcion("No hay registrados aspirantes Desvinculados de Secundaria"); 
+			throw excepcion; 
 		}
 		else {
-			validacion =  "El promedio de los estudiantes desvinculados graduados de secundaria es menor a "+ valor + "\n" + " Tiene un valor de " + formato.format(promedio);
+			float promedio = suma/total; 
+			if(promedio > valor) {
+				validacion =  "El promedio de los estudiantes desvinculados graduados de secundaria es mayor a "+ valor + "\n" + " Tiene un valor de " + formato.format(promedio); 
+			}
+			else {
+				validacion =  "El promedio de los estudiantes desvinculados graduados de secundaria es menor a "+ valor + "\n" + " Tiene un valor de " + formato.format(promedio);
+			}
+			return validacion; 
 		}
-		return validacion; 
 	} //Fin del método
 	
 	/**
 	 * Este método determina la cantidad de aspirantes desvinculados graduados de bachillerato que tienen una nota superior a 80 puntos, luego compara si este número es igual o mayor
 	 * al a la mitad del total y devulve una cadena de validación indicado si se se cumple o no la afirmación. 
 	 * @return
+	 * @throws Excepcion 
 	 */
-	public String BachilleratoMitadSuperior() {
+	public String BachilleratoMitadSuperior() throws Excepcion {
 		int total = 0; 
 		int mayor80 = 0; 
 		String validacion = ""; 
@@ -141,13 +156,19 @@ public class ControlEscalafon {
 				}
 			}
 		}
-		if(mayor80 >= (total*0.5)) {
-			validacion = "Por lo menos la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota de escalafón mayor a 80"; 
+		if(total == 0) {
+			Excepcion excepcion = new Excepcion("No hay registrados aspirantes Desvinculados de Bachillerato"); 
+			throw excepcion; 
 		}
 		else {
-			validacion = "Menos de la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota de escalafón mayor a 80"; 
+			if(mayor80 >= (total*0.5)) {
+				validacion = "Por lo menos la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota de escalafón mayor a 80"; 
+			}
+			else {
+				validacion = "Menos de la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota de escalafón mayor a 80"; 
+			}
+			return validacion; 
 		}
-		return validacion; 
 	}//Fin del método
 
 	

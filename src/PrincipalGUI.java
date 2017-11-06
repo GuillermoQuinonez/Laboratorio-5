@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.DecimalFormat;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -26,7 +27,7 @@ import javax.swing.SpinnerNumberModel;
  * @file PrincipalGUI.java
  * @author José Guillermo Quiñónez Castillo <qui17775@uvg.edu.gt>
  * @author Estuardo Ureta 17010 <ure17010@uvg.edu.gt>
- * @version 4/11/2017 
+ * @version 6/11/2017 
  */
 public class PrincipalGUI {
 
@@ -50,18 +51,14 @@ public class PrincipalGUI {
 	private JSpinner tfEspaniol;
 	private JSpinner tfMatematicas;
 	private JSpinner tfPromedioIngresado;
+	private DecimalFormat formato; 
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		controlador = new ControlEscalafon();
-		try {
-			controlador.Conexion();
-		}
-		catch(Exception e) {
-			System.out.println("No se pudo hacer la conexion");
-		}
+		controlador.Conexion();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -80,6 +77,7 @@ public class PrincipalGUI {
 	 */
 	public PrincipalGUI() {
 		initialize();
+		formato = new DecimalFormat("0.00"); 
 	}
 
 	/**
@@ -146,7 +144,7 @@ public class PrincipalGUI {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
 		panel_3.setBounds(0, 200, 446, 277);
-		panel_3.setBorder(new TitledBorder(null, "Ingreso de Notas", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "INGRESO DE NOTAS", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
 		
@@ -328,36 +326,74 @@ public class PrincipalGUI {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(arg0.getSource() == btnGuardar) {
-				if(tfNombre.getText().compareTo("") == 0 || tfDpi.getText().compareTo("") == 0) {
+				/*if(tfNombre.getText().compareTo("") == 0 || tfDpi.getText().compareTo("") == 0) {
 					JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos", "Campos Vacios", 2);
-				}
+				}*/
 				if(cbTipo.getSelectedIndex() == 0) {
 					JOptionPane.showMessageDialog(null, "Seleccione el tipo de aspirante", "Selección incorrecta", 2);
 				}
 				else {
 					if(cbTipo.getSelectedIndex() == 1) {
-						controlador.GuardarAspirante(1, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), Float.parseFloat(tfMatematicas.getValue().toString()), Float.parseFloat(tfEspaniol.getValue().toString()), Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), Float.parseFloat(tfNota3.getValue().toString()), 0);
+						try {
+							controlador.GuardarAspirante(1, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), Float.parseFloat(tfMatematicas.getValue().toString()), Float.parseFloat(tfEspaniol.getValue().toString()), Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), Float.parseFloat(tfNota3.getValue().toString()), 0);
+							JOptionPane.showMessageDialog(null, "La información del aspirante se ha guardado", "Guardado", 1);
+						} catch (NumberFormatException | Excepcion e) {
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos", "Campos Vacios", 2);
+						}
 					}
 					else if(cbTipo.getSelectedIndex() == 2) {
-						controlador.GuardarAspirante(1, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), Float.parseFloat(tfMatematicas.getValue().toString()), Float.parseFloat(tfEspaniol.getValue().toString()), Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), Float.parseFloat(tfNota3.getValue().toString()), Float.parseFloat(tfAptitud.getValue().toString()));
+						try {
+							controlador.GuardarAspirante(1, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), Float.parseFloat(tfMatematicas.getValue().toString()), Float.parseFloat(tfEspaniol.getValue().toString()), Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), Float.parseFloat(tfNota3.getValue().toString()), Float.parseFloat(tfAptitud.getValue().toString()));
+							JOptionPane.showMessageDialog(null, "La información del aspirante se ha guardado", "Guardado", 1);
+						} catch (NumberFormatException | Excepcion e) {
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos", "Campos Vacios", 2);
+						}
 					}
 					else if(cbTipo.getSelectedIndex() == 3) {
-						controlador.GuardarAspirante(3, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), 0, 0, Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), 0, 0);
+						try {
+							controlador.GuardarAspirante(3, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), 0, 0, Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), 0, 0);
+							JOptionPane.showMessageDialog(null, "La información del aspirante se ha guardado", "Guardado", 1);
+						} catch (NumberFormatException | Excepcion e) {
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos", "Campos Vacios", 2);
+						}
 						
 					}
 					else if(cbTipo.getSelectedIndex() == 4) {
-						controlador.GuardarAspirante(4, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), 0, 0, Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), 0, 0);
+						try {
+							controlador.GuardarAspirante(4, tfNombre.getText(), tfDpi.getText(), Float.parseFloat(tfHistoria.getValue().toString()), 0, 0, Float.parseFloat(tfNota1.getValue().toString()), Float.parseFloat(tfNota2.getValue().toString()), 0, 0);
+							JOptionPane.showMessageDialog(null, "La información del aspirante se ha guardado", "Guardado", 1);
+						} catch (NumberFormatException | Excepcion e) {
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos", "Campos Vacios", 2);
+						}
 					}
 					txtEscalafon.setText("");
+					tfNombre.setText("");
+					tfDpi.setText("");
+					cbTipo.setSelectedIndex(0); 
+					tfNota1.setValue(0);
+					tfNota2.setValue(0);
+					tfNota3.setValue(0);
+					tfHistoria.setValue(0);
+					tfEspaniol.setValue(0);
+					tfMatematicas.setValue(0);
+					tfAptitud.setValue(0);
 				}
 				
 			}
 			if(arg0.getSource() == btnValidar) {
 				float valor = Float.parseFloat(tfPromedioIngresado.getValue().toString()); 
-				txtAspirantesSecundaria.setText(controlador.PromedioSecundariaMayorA(valor));
+				try {
+					txtAspirantesSecundaria.setText(controlador.PromedioSecundariaMayorA(valor));
+				} catch (Excepcion e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Sin registro", 2);
+				}
 			}
 			if(arg0.getSource() == btnValidar2) {
-				txtAspirantesBachillerato.setText(controlador.BachilleratoMitadSuperior());
+				try {
+					txtAspirantesBachillerato.setText(controlador.BachilleratoMitadSuperior());
+				} catch (Excepcion e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Sin registro", 2);
+				}
 			}
 			if(arg0.getSource() == btnActualizar) {
 				txtEscalafon.setText("");
@@ -365,7 +401,7 @@ public class PrincipalGUI {
 				for(Aspirantes miaspirante: controlador.OrdenarParaEscalafon()) {
 					String nombre = miaspirante.getNombre(); 
 					String clase = miaspirante.getClass().toString(); 
-					String nota = String.valueOf(miaspirante.getNotaEscalafon()); 
+					String nota = String.valueOf(formato.format(miaspirante.getNotaEscalafon())); 
 					txtEscalafon.setText(txtEscalafon.getText() + "\n" + nombre + " (" + clase + ") : " + nota);	
 				}
 			}
@@ -384,6 +420,7 @@ public class PrincipalGUI {
 				notamatematicas.setEditable(true);
 				JFormattedTextField notaespaniol = ((JSpinner.DefaultEditor) tfEspaniol.getEditor()).getTextField();
 				notaespaniol.setEditable(true);
+				tfAptitud.setValue(0);
 				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
 				notaaptitud.setEditable(false);
 				
@@ -399,22 +436,30 @@ public class PrincipalGUI {
 				notaaptitud.setEditable(true);
 			}
 			if(cbTipo.getSelectedIndex() == 3) {
+				tfNota3.setValue(0);
 				JFormattedTextField nota3 = ((JSpinner.DefaultEditor) tfNota3.getEditor()).getTextField();
 				nota3.setEditable(false);
+				tfMatematicas.setValue(0);
 				JFormattedTextField notamatematicas = ((JSpinner.DefaultEditor) tfMatematicas.getEditor()).getTextField();
 				notamatematicas.setEditable(false);
+				tfEspaniol.setValue(0);
 				JFormattedTextField notaespaniol = ((JSpinner.DefaultEditor) tfEspaniol.getEditor()).getTextField();
 				notaespaniol.setEditable(false);
+				tfAptitud.setValue(0);
 				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
 				notaaptitud.setEditable(false);
 			}
 			if(cbTipo.getSelectedIndex() == 4) {
+				tfNota3.setValue(0);
 				JFormattedTextField nota3 = ((JSpinner.DefaultEditor) tfNota3.getEditor()).getTextField();
 				nota3.setEditable(false);
+				tfMatematicas.setValue(0);
 				JFormattedTextField notamatematicas = ((JSpinner.DefaultEditor) tfMatematicas.getEditor()).getTextField();
 				notamatematicas.setEditable(false);
+				tfEspaniol.setValue(0);
 				JFormattedTextField notaespaniol = ((JSpinner.DefaultEditor) tfEspaniol.getEditor()).getTextField();
 				notaespaniol.setEditable(false);
+				tfAptitud.setValue(0);
 				JFormattedTextField notaaptitud = ((JSpinner.DefaultEditor) tfAptitud.getEditor()).getTextField();
 				notaaptitud.setEditable(false);
 			}
