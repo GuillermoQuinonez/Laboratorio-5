@@ -19,7 +19,7 @@ public class ControlEscalafon {
 	private Datastore ds; //NoSQL Datastore
 	private DecimalFormat formato; 
 	/**
-	 * Constructor del controlador, inicializael arreglo
+	 * Constructor del controlador, inicializa el arreglo
 	 */
 	public ControlEscalafon() {
 		aspirantes = new ArrayList<Aspirantes>(); 
@@ -47,7 +47,7 @@ public class ControlEscalafon {
 		MongoClient mongo = new MongoClient();
 	    Morphia morphia = new Morphia();
 	    morphia.map(Aspirantes.class); // clases a guardar
-	    ds = morphia.createDatastore(mongo, "ASPIRANTES"); // Base Datos
+	    ds = morphia.createDatastore(mongo, "Aspirantes"); // Se establece la conexión con la base de datos
 	}//Fin del método
 	
 	/**
@@ -139,7 +139,7 @@ public class ControlEscalafon {
 	} //Fin del método
 	
 	/**
-	 * Este método determina la cantidad de aspirantes desvinculados graduados de bachillerato que tienen una nota superior a 80 puntos, luego compara si este número es igual o mayor
+	 * Este método determina la cantidad de aspirantes desvinculados graduados de bachillerato que tienen una nota superior a 80 puntos en su nota promedio de escalafón, luego compara si este número es igual o mayor
 	 * al a la mitad del total y devulve una cadena de validación indicado si se se cumple o no la afirmación. 
 	 * @return
 	 * @throws Excepcion 
@@ -150,9 +150,10 @@ public class ControlEscalafon {
 		String validacion = ""; 
 		for(Aspirantes miaspirante: OrdenarParaEscalafon()) {
 			if(miaspirante instanceof DesvinculadoBachillerato) {
-				total++; 
-				if(miaspirante.getNotaEscalafon() > 80) {
+				total++;
+				if(miaspirante.getNotaEscalafon()> 80) {
 					mayor80++; 
+				
 				}
 			}
 		}
@@ -162,10 +163,10 @@ public class ControlEscalafon {
 		}
 		else {
 			if(mayor80 >= (total*0.5)) {
-				validacion = "Por lo menos la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota de escalafón mayor a 80"; 
+				validacion = "Por lo menos la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota promedio mayor a 80"; 
 			}
 			else {
-				validacion = "Menos de la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota de escalafón mayor a 80"; 
+				validacion = "Menos de la mitad de los aspirantes desvinculados graduados de bachillerato tienen una nota promedio mayor a 80"; 
 			}
 			return validacion; 
 		}
